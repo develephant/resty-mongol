@@ -1,6 +1,6 @@
 local dbmt = require ((...)..".dbmt" )
 
-local socket = ngx and ngx.socket.tcp or require 'socket'.tcp
+local socket = ngx and ngx.socket.tcp
 
 local function parse_host(str)
   local host, port = str:match ( "([^:]+):?(%d*)" )
@@ -138,9 +138,12 @@ function new(self)
   })
 end
 
-return setmetatable({}, {
-  __newindex = function(table, key, val)
-    error('attempt to write to undeclared variable "'..key..'": '..debug.traceback())
-  end,
-  __call = new
-})
+return {
+  new = new  
+}
+-- return setmetatable({}, {
+--   __newindex = function(table, key, val)
+--     error('attempt to write to undeclared variable "'..key..'": '..debug.traceback())
+--   end,
+--   __call = new
+-- })
