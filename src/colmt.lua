@@ -46,7 +46,7 @@ local function full_collection_name ( self , collection )
 end
 
 local function docmd ( conn , opcode , message ,  reponseTo )
-  local req_id = math.random(1, 4294967295)
+  local req_id = math.random(1, 2147483647)
   local requestID = num_to_le_uint ( req_id )
   reponseTo = reponseTo or "\255\255\255\255"
   opcode = num_to_le_uint ( assert ( opcodes [ opcode ] ) )
@@ -306,9 +306,10 @@ function colmethods:insert(docs, continue_on_error, safe)
         return oldpairs(t)
       end
     end
+
     local r, err = self.db_obj:cmd(attachpairs_start({
       count = self.col,
-      query = next(query) and query or nil
+      query = query or nil
     }, "count"))
     pairs = oldpairs
     if not r then
