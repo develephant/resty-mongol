@@ -170,14 +170,14 @@ Returns a an array, or nil in result. (This is not a Cursor)
 
 The __info__ table holds the following Boolean parameters:
 
-|__info.__        |
-|-----------------|
-|`startingFrom`|
-|`numberReturned`|
-|`QueryFailure`|
-|`CursorNotFound`|
-|`AwaitCapable`|
-|`ShardConfigStale`|
+|Namespace        |Type         |
+|-----------------|-------------|
+|`startingFrom`|Number|
+|`numberReturned`|Number|
+|`QueryFailure`|Boolean|
+|`CursorNotFound`|Boolean|
+|`AwaitCapable`|Boolean|
+|`ShardConfigStale`|Boolean|
 
 
 ####r = col:find_one(query, returnfields)
