@@ -81,9 +81,11 @@ The returned connection object may be this connection object itself.
 ####databases = conn:databases ( )
 Returns a table describing databases on the server.
 
-		databases.name: string
-		databases.empty: boolean
-		databases.sizeOnDisk: number
+|Namespace|Type|
+|_________|____|
+|`databases.name`|String|
+|`databases.empty`|Boolean|
+|`databases.sizeOnDisk`|Number|
 
 ####conn:shutdown()
 Shutsdown the server. Returns nothing.
@@ -94,7 +96,7 @@ Returns a database object, or nil.
 ### Database
 ------------
 
-####ok, err = db:listCollections()
+####res, err = db:listCollections()
 Returns table array of database collections, or nil.
 
 ####db:dropDatabase()
