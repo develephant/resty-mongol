@@ -26,9 +26,12 @@ function dbmethods:cmd(q)
   end
 end
 
-function dbmethods:listcollections ( )
-  local col = self:get_col("system.namespaces")
-  return col:find( { } )
+function dbmethods:listCollections ( )
+  local r, err = self:cmd({ listCollections = true })
+  if not r then
+    return nil, err
+  end
+  return r
 end
 
 function dbmethods:dropDatabase ( )
@@ -95,7 +98,7 @@ function dbmethods:get_gridfs(fs, files_col, chunks_col)
   if not fs then
     return nil, "fs name needed"
   end
-  
+
   files_col = files_col or "files"
   chunks_col = chunks_col or "chunks"
 
