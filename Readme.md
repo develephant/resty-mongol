@@ -159,19 +159,19 @@ Returns number of rows been deleted, or nil with error message.
  - safe can be a boolean or integer, defaults to `0`. If `1`, the program will issue a cmd `getlasterror` to server to query the result. If `false`, return value `n` would always be `-1`
 
 
-####bin_id, result, info = col:query(query, returnfields, startIndex, resultCount)
+####id, result, info = col:query(query, returnfields, startIndex, resultCount)
 Returns a an array, or nil in result. (This is not a Cursor)
 
  - returnfields is the fields to return, eg: `{n=0}` or `{n=1}`
  - startIndex is the index number starting position.
  - resultCount is the amount of results per call.
 
-(The first return parameter is a binary id)
+(The first return parameter can generally be ignored)
 
 The __info__ table holds the following Boolean parameters:
 
-info.
--------
+|info.            |
+|-----------------|
 |startingFrom|
 |numberReturned|
 |QueryFailure|
