@@ -82,7 +82,7 @@ The returned connection object may be this connection object itself.
 Returns a table describing databases on the server.
 
 |Namespace|Type|
-|_________|____|
+|---------|----|
 |`databases.name`|String|
 |`databases.empty`|Boolean|
 |`databases.sizeOnDisk`|Number|
