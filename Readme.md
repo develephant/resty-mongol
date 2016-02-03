@@ -168,16 +168,16 @@ Returns a an array, or nil in result. (This is not a Cursor)
 
 (The first return parameter can generally be ignored)
 
-The __info__ table holds the following Boolean parameters:
+The __info__ return table holds the following values:
 
 |Namespace        |Type         |
 |-----------------|-------------|
-|`startingFrom`|Number|
-|`numberReturned`|Number|
-|`QueryFailure`|Boolean|
-|`CursorNotFound`|Boolean|
-|`AwaitCapable`|Boolean|
-|`ShardConfigStale`|Boolean|
+|`info.startingFrom`|Number|
+|`info.numberReturned`|Number|
+|`info.QueryFailure`|Boolean|
+|`info.CursorNotFound`|Boolean|
+|`info.AwaitCapable`|Boolean|
+|`info.ShardConfigStale`|Boolean|
 
 
 ####r = col:find_one(query, returnfields)
