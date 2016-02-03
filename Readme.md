@@ -40,8 +40,10 @@ it returns a connection object.
 		mongol = require "resty.mongol"
 		conn = mongol() -- return a connection object
 
-###Connection objects have server wide methods.
-------------
+##API
+
+### Connection
+--------------
 
 ####ok,err = conn:connect(host, port)
 Default host and port is: `localhost` and `27017`.
@@ -76,7 +78,6 @@ or `nil , errmsg` on failure.
 
 The returned connection object may be this connection object itself.
 
-
 ####databases = conn:databases ( )
 Returns a table describing databases on the server.
 
@@ -90,14 +91,17 @@ Shutsdown the server. Returns nothing.
 ####db = conn:new_db_handle(database_name)
 Returns a database object, or nil.
 
-###Database objects perform actions on a database
+### Database
 ------------
 
-####db:list()
+####ok, err = db:listCollections()
+Returns table array of database collections, or nil.
 
 ####db:dropDatabase()
+Removes the database, all related collections and documents.
 
 ####db:add_user(username, password)
+Add a User for authentication.
 
 ####ok, err = db:auth(username, password)
 Returns 1 in case of success, or nil with error message.
@@ -107,16 +111,18 @@ Returns a collection object for more operations.
 
 ####gridfs = db:get_gridfs(fs)
 
-###Collection objects
-------------
+###Collections
+--------------
 
 ####n = col:count(query)
+Returns a the collection document count.
 
 ####ok, err = col:drop()
+Remove a collection, and all related documents.
 Returns 1 in case of success, or nil with error message.
 
 ####n, err = col:update(selector, update, upsert, multiupdate, safe)
-Returns number of rows been updated or nil for error.
+Returns number of rows updated or nil for error.
 
  - upsert, if set to `1`, the database will insert the supplied object into the collection if no matching document is found, default to `0`.
  - multiupdate, if set to `1`, the database will update all matching objects in the collection. Otherwise only updates first matching doc, default to `0`. Multi update only works with $ operators.
@@ -129,10 +135,16 @@ Batch update, returns update result document as described in mongo docs. (Only u
  - ordered, if true, tells the server to execute the operations in the order they are given in the list. If false, the database is free to parallelize the operations but does not guarantee order.
  - writeConcern is a write concern document {w=<number>, j=<boolean>, etc}
 
+### Aggregation
+---------------
+
 ####n, err = col:aggregate(pipeline)
-Aggregation. Returns a result document. See mongo aggregation db command docs for more info.
+Returns a result document. See mongo aggregation db command docs for more info.
 
  - pipeline is an ordered list of aggregation pipeline functions.
+
+### Insertions
+--------------
 
 ####n, err = col:insert(docs, continue_on_error, safe)
 Returns 0 for success, or nil with error message.
@@ -164,7 +176,7 @@ Returns a cursor object for excuting query.
 
 ####col:kill_cursors(cursorIDs)
 
-###Cursor objects
+## Cursors
 --------------------
 
 ####index, item = cursor:next()
@@ -179,13 +191,13 @@ A handy wrapper around cursor:next() that works in a generic for loop:
 Limits the number of results returned.
 
 ####result = cursor:sort(field, size)
-Returns an array with size `size` sorted by given field. 
+Returns an array with size `size` sorted by given field.
 
- - field is an array by which to sort, and this array size _MUST be 1_. The element in the array has as key the field name, and as value either `1` for ascending sort, or `-1` for descending sort. 
+ - field is an array by which to sort, and this array size _MUST be 1_. The element in the array has as key the field name, and as value either `1` for ascending sort, or `-1` for descending sort.
  - num is the temp array size for sorting, default to `10000`.
 
-###Object id
--------------------
+### Object ID
+-------------
 
 ####objid:tostring()
 ####objid:get_ts()
@@ -194,9 +206,9 @@ Returns an array with size `size` sorted by given field.
 ####objid:get_inc()
 
 ###Grid FS Object
--------------------
+-----------------
 
-_under developing_
+_under development_
 
 ####gridfs_file = gridfs:find_one(fields)
 Returns a gridfs file object.
