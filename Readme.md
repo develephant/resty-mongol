@@ -158,6 +158,15 @@ Returns number of rows been deleted, or nil with error message.
  - singleRemove if set to 1, the database will remove only the first matching document in the collection. Otherwise all matching documents will be removed. Default to `0`
  - safe can be a boolean or integer, defaults to `0`. If `1`, the program will issue a cmd `getlasterror` to server to query the result. If `false`, return value `n` would always be `-1`
 
+ ####_, res, info = col:query(query, returnfields, startIdx, resultCnt)
+ Returns a an array, or nil. (This is not a Cursor)
+
+  - returnfields is the fields to return, eg: `{n=0}` or `{n=1}`
+	- startIdx is the index number starting position.
+	- resultCnt is the amount of results per call.
+
+	(The first return parameter seems to be a throw-away)
+
 ####r = col:find_one(query, returnfields)
 Returns a single element array, or nil.
 
